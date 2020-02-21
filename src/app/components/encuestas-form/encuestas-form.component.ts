@@ -1,0 +1,102 @@
+import { Component, OnInit } from '@angular/core';
+import {EncuestasService} from '../../services/encuestas.service'
+import {SurveryResp} from '../../model/survery-resp'
+
+@Component({
+  selector: 'app-encuestas-form',
+  templateUrl: './encuestas-form.component.html',
+  styleUrls: ['./encuestas-form.component.css']
+})
+export class EncuestasFormComponent implements OnInit {
+
+  preguntas:any=[]
+
+  respuestas:any=[]
+
+  stan=true
+
+  surveryresps=[{
+    survey:'',
+    answer_id:'',
+    survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},{
+  survey:'',
+  answer_id:'',
+  survey_id:'',
+},]
+
+  pregResp:any=[]
+  
+  constructor(private serviceEncuesta:EncuestasService) { }
+
+
+
+  ngOnInit(): void {
+    this.serviceEncuesta.getPreguntas().subscribe(
+      (data)=>{
+        console.log(data)
+        this.preguntas=data['preguntas']}
+    )
+
+    this.getRespuesta()
+    this.armaArreglo()
+  }
+
+  armaArreglo(){
+     
+  }
+
+  getRespuesta(){
+   this.serviceEncuesta.getRespuestas().subscribe(
+     (data)=>{this.respuestas=data['answers']
+        console.log(data)
+        for(let i=0;i<10;i++){
+          
+        this.pregResp[i]= data['answers']
+        }
+        console.log(this.pregResp)
+      }
+
+   )
+
+  }
+  
+  
+
+}

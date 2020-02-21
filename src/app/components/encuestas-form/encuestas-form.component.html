@@ -1,0 +1,121 @@
+<div class="container" *ngIf="stan">
+  <div class="row">
+    <div class="col-xs-12">
+      <h5 class="card-title">Encuestas </h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9"></div>
+  </div>
+  <div class="row">
+    <!--Tabla de Encuesta-->
+    <div class="col-xs-12">
+      <table class="table table-responsive table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th id="4" scope="col">{{preguntas[5-1].question_string}}</th>
+            <th id="5" scope="col">{{preguntas[6-1].question_string}}</th>
+            <th id="6" scope="col">{{preguntas[7-1].question_string}}</th>
+            <th id="7" scope="col">{{preguntas[8-1].question_string}}</th>
+            <th id="8" scope="col">{{preguntas[9-1].question_string}}</th>
+            <th id="9" scope="col">{{preguntas[10-1].question_string}}</th>
+            <th id="10" scope="col">{{preguntas[11-1].question_string}}</th>
+            <th id="11" scope="col">{{preguntas[12-1].question_string}}</th>
+
+          </tr>
+        </thead>
+        <tbody >
+        
+          <tr *ngFor="let res of pregResp ;  index as i">
+            <th scope="row" >{{i}}</th>
+            <td>
+              <div class="form-group">
+                <select class="form-control" id="sexo">
+                  <option disabled selected>Seleccionar</option>
+                  <option>{{res[7].answer_string}}</option>
+                  <option>{{res[8].answer_string}}</option>
+                </select>
+              </div>
+            </td>
+            
+
+            <td>
+              <div class="form-group">
+                <select class="form-control" id="edad">
+                  <option disabled selected>Seleccionar</option>
+                  <option>{{res[0].answer_string}}</option>
+                  <option>{{res[1].answer_string}}</option>
+                  <option>{{res[2].answer_string}}</option>
+                  <option>{{res[3].answer_string}}</option>
+                  <option>{{res[4].answer_string}}</option>
+                  <option>{{res[5].answer_string}}</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" id="procedencia">
+                  <option disabled selected>Seleccionar</option>
+                  <option>{{res[9].answer_string}}</option>
+                  <option>{{res[10].answer_string}}</option>
+                  <option>{{res[11].answer_string}}</option>
+            
+              
+                </select>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" id="deporte">
+                  <option disabled selected>Seleccionar</option>
+                  <option>{{res[14].answer_string}}</option>
+                  <option>{{res[15].answer_string}}</option>
+                  <option>{{res[17].answer_string}}</option>
+              
+                </select>
+              </div>
+            </td>
+            <td><input type="text" placeholder="Deporte"></td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" id="deporteSecretaria">
+                  <option disabled selected>Seleccionar</option>
+                  <option>{{res[18].answer_string}}</option>
+                  <option>{{res[19].answer_string}}</option>
+                </select>
+              </div>
+            </td>
+            <td>
+          
+            </td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" id="secretaria">
+                  <option disabled selected>Seleccionar</option>
+                  <option>{{res[20].answer_string}}</option>
+                  <option>{{res[21].answer_string}}</option>
+                  <option>{{res[22].answer_string}}</option>
+                  <option>{{res[23].answer_string}}</option>
+              
+                </select>
+              </div>
+            </td>
+          </tr>
+
+
+          <!--   <tr *ngFor="let respuesta of res; index as i" >
+
+                    <th scope="row">{{i+1}}</th>
+                
+                   </tr>      -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
