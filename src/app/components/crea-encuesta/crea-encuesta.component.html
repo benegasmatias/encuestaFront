@@ -1,1 +1,136 @@
-<p>crea-encuesta works!</p>
+
+<div class="container">
+   
+    <div class="row pt-2">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h1>Crear Encuesta</h1>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+   <!--Selecciona las pregunta y agrega-->
+    <div class="row pt-5">
+
+        <div class="col-md-9">
+            <h5>Seleccione una Pregunta</h5>
+            <form [formGroup]="formSelecter">
+                <div class="row form">
+
+              
+                <div class="col-md-6 ">
+                  <select class="form-control" formControlName="questionSelect" required>
+                    <option  disabled selected value="">Seleccionar</option>
+                    <option  [ngValue]="question" *ngFor="let question of questions">¿{{question.question_string}}?
+                    </option>
+                </select>
+              
+                </div>
+                <div class="col-md-4 p-0">
+                    <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button>
+                    
+                </div>
+
+                <button class="btn btn-success" [disabled]="!formSelecter.valid" (click)="selectQuestions()">Agregar</button>
+               
+               
+              
+
+           
+               
+            </div>
+
+
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+ <!--Muestra las preguntas-->
+    <div class="row pt-5">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="card-title">Preguntas para la Encuesta</h5>
+                    
+                    <div class="list-group-item" *ngFor="let question of questionsSelect; let i = index" >
+                    
+                       <div class="row">
+                        <div class="col-md-2">{{i+1}}</div>
+                        <div class="col-md-6">{{question.question_string}}</div>
+                        <div class="col-md-4"><button class="btn btn-danger" (click)="deleteItem(i)">Delete</button></div>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+
+    </div>
+   
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Creando Nueva Pregunta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span ar
+            ia-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div [formGroup]="formNewPregunta">
+            <div class="input-group mb-3">
+            <input class="form-control" type="text" placeholder="Nueva Pregunta" [readonly]="!PreValid" formControlName="pregunta">
+
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">?</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+            <input class="form-control mb-2 btn-sm" type="text" *ngIf="!PreValid" placeholder="Respuesta de la Pregunta" formControlName="respuesta">
+
+            <button class="btn btn-success mb-2 btn-sm" *ngIf="PreValid" [disabled]="!formNewPregunta.valid" (click)="addQuestion()">Guardar pregunta</button>
+
+            <button class="btn btn-info mb-2 btn-sm" *ngIf="!PreValid" (click)="gestionQuestionAndAnswer()">Guardar Respuesta</button>
+            </div>
+            <div class="col-4">
+            <button class="btn btn-outline-danger btn-sm mb-2" (click)="cancelaNewPregunta()">Cancelar Pregunta</button>
+           </div>
+          </div>
+
+          </div>
+
+          <div>
+        
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="card-title">Respuestas para la pregunta <a class="text-success">{{newQuestion.question_string}}</a></h5>
+                    
+                   <div class="list-group-item" *ngFor="let answer of answersFornewQuestion; let i = index" >
+                    
+                       <div class="row">
+                        <div class="col-md-2">{{i+1}}</div>
+                        <div class="col-md-6">{{answer.answer_string}}</div>
+                        <div class="col-md-4"><button class="btn btn-danger" (click)="deleteAnswer(i)">Delete</button></div>
+                            </div>
+                        
+                    </div> 
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> 

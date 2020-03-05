@@ -5,7 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EncuestasFormComponent } from './components/encuestas-form/encuestas-form.component';
 import {HttpClientModule} from '@angular/common/http';
-import { CreaEncuestaComponent } from './components/crea-encuesta/crea-encuesta.component'
+import { CreaEncuestaComponent } from './components/crea-encuesta/crea-encuesta.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { CreaEncuestaComponent } from './components/crea-encuesta/crea-encuesta.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FontAwesomeModule 
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

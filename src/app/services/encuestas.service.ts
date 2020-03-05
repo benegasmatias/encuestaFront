@@ -17,6 +17,10 @@ export class EncuestasService {
   getRespuestas(){
     return this.http.get(`${this.URI}/answers/index.json`);
   }
+
+  addQuestion(question){
+    return this.http.post(`${this.URI}/questions/add.json`,question);
+  }
 }
 
 
