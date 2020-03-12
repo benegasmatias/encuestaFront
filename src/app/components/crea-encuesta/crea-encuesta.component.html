@@ -11,28 +11,40 @@
    <!--Selecciona las pregunta y agrega-->
     <div class="row pt-5">
 
-        <div class="col-md-9">
-            <h5>Seleccione una Pregunta</h5>
+        <div class="col-md-9 ">
+
+          
+            <div class="row">
+           
+                <h5 class="responsiveBody">Seleccione una Pregunta</h5>
+            
+           
+            
+            </div>
+           
             <form [formGroup]="formSelecter">
                 <div class="row form">
 
-              
-                <div class="col-md-6 ">
-                  <select class="form-control" formControlName="questionSelect" required>
-                    <option  disabled selected value="">Seleccionar</option>
+                <div class="col-6 ">
+                  <select class="form-control responsiveBody" formControlName="questionSelect" required>
+                    <option  disabled selected value=""> <h6 *ngIf="questions.length!=0">Seleccionar..</h6>
+                      <div *ngIf="questions.length==0" class="spinner-border spinner-border-sm responsiveBody ml-2" role="status">
+                        <span class="sr-only">Cargando Preguntas...</span>
+                      </div></option>
                     <option  [ngValue]="question" *ngFor="let question of questions">¿{{question.question_string}}?
                     </option>
                 </select>
               
                 </div>
-                <div class="col-md-4 p-0">
-                    <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+</button>
+                <div class="col-2 p-0">
+                    <button  type="button" class="btn btn-primary responsiveBody " data-toggle="modal" data-target="#exampleModal">+</button>
                     
                 </div>
 
-                <button class="btn btn-success" [disabled]="!formSelecter.valid" (click)="selectQuestions()">Agregar</button>
+                <div class="col-4">
+                <button class="btn btn-success responsiveBody" [disabled]="!formSelecter.valid" (click)="selectQuestions()">Agregar</button>
                
-               
+              </div>
               
 
            
@@ -52,32 +64,39 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h5 class="card-title">Preguntas para la Encuesta</h5>
+                    <h5 class="card-title responsiveBody">Preguntas para la Encuesta</h5>
                     
                     <div class="list-group-item" *ngFor="let question of questionsSelect; let i = index" >
                     
                        <div class="row">
-                        <div class="col-md-2">{{i+1}}</div>
-                        <div class="col-md-6">{{question.question_string}}</div>
-                        <div class="col-md-4"><button class="btn btn-danger" (click)="deleteItem(i)">Delete</button></div>
+                        <div class="col-2  badge badge-light responsiveBody">{{i+1}}</div>
+                        <div class="col-6 responsiveBody">{{question.question_string | titlecase}}</div>
+                        <div class="col-4"><button class="btn btn-danger responsiveBody " (click)="deleteItem(i)">Delete</button></div>
                             </div>
                         
                     </div>
+                </div>
+                <div class="card-footer" *ngIf="questionsSelect.length != 0">
+                  <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-2"><button class="btn btn-success responsiveBody" (click)="send()" >Crear</button></div>
+                </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4"></div>
 
     </div>
+ 
    
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Creando Nueva Pregunta</h5>
+          <h1 class="modal-title  " id="exampleModalLabel">Creando Nueva Pregunta</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span ar
             ia-hidden="true">&times;</span>
@@ -96,12 +115,12 @@
             <div class="col-8">
             <input class="form-control mb-2 btn-sm" type="text" *ngIf="!PreValid" placeholder="Respuesta de la Pregunta" formControlName="respuesta">
 
-            <button class="btn btn-success mb-2 btn-sm" *ngIf="PreValid" [disabled]="!formNewPregunta.valid" (click)="addQuestion()">Guardar pregunta</button>
+            <button class="btn btn-success mb-2 btn-sm " *ngIf="PreValid" [disabled]="!formNewPregunta.valid" (click)="addQuestion()">Seleccionar Pregunta</button>
 
-            <button class="btn btn-info mb-2 btn-sm" *ngIf="!PreValid" (click)="gestionQuestionAndAnswer()">Guardar Respuesta</button>
+            <button class="btn btn-info mb-2 btn-sm " *ngIf="!PreValid" (click)="gestionQuestionAndAnswer()">Seleccionar Respuesta</button>
             </div>
             <div class="col-4">
-            <button class="btn btn-outline-danger btn-sm mb-2" (click)="cancelaNewPregunta()">Cancelar Pregunta</button>
+            <button class="btn btn-outline-danger btn-sm mb-2 " *ngIf="!PreValid" (click)="cancelaNewPregunta()">Cancelar Pregunta</button>
            </div>
           </div>
 
@@ -112,13 +131,13 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h5 class="card-title">Respuestas para la pregunta <a class="text-success">{{newQuestion.question_string}}</a></h5>
+                    <h5 class="card-title responsiveBody">Respuestas para la pregunta <a class="text-success">{{newQuestion.question_string}}</a></h5>
                     
                    <div class="list-group-item" *ngFor="let answer of answersFornewQuestion; let i = index" >
                     
                        <div class="row">
                         <div class="col-md-2">{{i+1}}</div>
-                        <div class="col-md-6">{{answer.answer_string}}</div>
+                        <div class="col-md-6">{{answer}}</div>
                         <div class="col-md-4"><button class="btn btn-danger" (click)="deleteAnswer(i)">Delete</button></div>
                             </div>
                         
@@ -128,8 +147,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary responsiveBody" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary responsiveBody">Guardar</button>
         </div>
       </div>
     </div>

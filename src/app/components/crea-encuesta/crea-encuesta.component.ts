@@ -3,8 +3,8 @@ import {EncuestasService } from '../../services/encuestas.service';
 import { QuestionSelect } from 'src/app/model/question';
 
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { Answer } from 'src/app/model/answer';
 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crea-encuesta',
@@ -27,7 +27,7 @@ export class CreaEncuestaComponent implements OnInit {
   //nueva pregunta 
   newQuestion:QuestionSelect = new QuestionSelect()
  
-  answersFornewQuestion: Answer[] = []
+  answersFornewQuestion: any[] = []
 
   formSelecter= new FormGroup(({
     questionSelect: new FormControl('', Validators.required)
@@ -39,7 +39,7 @@ export class CreaEncuestaComponent implements OnInit {
   })
 
 
-  constructor(private encuestasService:EncuestasService) { }
+  constructor(private encuestasService:EncuestasService,private route:Router) { }
   
   ngOnInit(): void {
     
@@ -67,8 +67,16 @@ export class CreaEncuestaComponent implements OnInit {
 
 
   gestionQuestionAndAnswer(){
-    
-    
+   
+
+    if(this.formNewPregunta.get('respuesta').value != ''){
+    this.answersFornewQuestion.push(this.formNewPregunta.get('respuesta').value)
+    console.log(this.answersFornewQuestion)
+    this.formNewPregunta.get('respuesta').setValue('')
+   }else{
+     alert( "La respuesta No puede estar vacia." )
+   }
+
   }
 
   addQuestion(){
@@ -100,7 +108,7 @@ export class CreaEncuestaComponent implements OnInit {
   //Verifica que la pregunta escrita no tenga Signos de preguntas y Diacriticos
   verificaStrignPregunta(pregunta:string){
     
-    if(pregunta.indexOf('¿')||pregunta.lastIndexOf('?')){ 
+    if(pregunta.indexOf('¿')!=-1||pregunta.lastIndexOf('?')!=-1){ 
         pregunta= pregunta.replace('¿','');
         pregunta= pregunta.replace('?','');
         
@@ -122,8 +130,16 @@ export class CreaEncuestaComponent implements OnInit {
     this.formNewPregunta= new FormGroup({
       pregunta: new FormControl('',[Validators.minLength(4),Validators.required])
     })
-
+    this.answersFornewQuestion.splice(0);
     this.PreValid=true
+  }
+
+
+  //envia arreglos de preguntaas seleccionadas
+
+  send(){
+   this.encuestasService.setArray(this.questionsSelect);
+   this.route.navigate(['vistaEncuesta'])
   }
 
 }
