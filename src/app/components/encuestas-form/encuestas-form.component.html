@@ -13,16 +13,17 @@
     <div class="col-xs-12">
       <table class="table table-responsive table-sm">
         <thead class="thead-dark">
-          <tr>
+          <tr >
             <th scope="col">#</th>
-            <th id="4" scope="col">{{preguntas[5-1].question_string}}</th>
+            <th *ngFor="let question of preguntas">{{question.question_string | titlecase}}</th>
+          <!--   <th id="4" scope="col">{{preguntas[5-1].question_string}}</th>
             <th id="5" scope="col">{{preguntas[6-1].question_string}}</th>
             <th id="6" scope="col">{{preguntas[7-1].question_string}}</th>
             <th id="7" scope="col">{{preguntas[8-1].question_string}}</th>
             <th id="8" scope="col">{{preguntas[9-1].question_string}}</th>
             <th id="9" scope="col">{{preguntas[10-1].question_string}}</th>
             <th id="10" scope="col">{{preguntas[11-1].question_string}}</th>
-            <th id="11" scope="col">{{preguntas[12-1].question_string}}</th>
+            <th id="11" scope="col">{{preguntas[12-1].question_string}}</th>-->
 
           </tr>
         </thead>

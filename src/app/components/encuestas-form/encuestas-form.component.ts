@@ -10,7 +10,7 @@ import { QuestionSelect } from 'src/app/model/question';
 })
 export class EncuestasFormComponent implements OnInit {
 
-  preguntas:any=[]
+  preguntas:QuestionSelect[]=[]
 
   respuestas:any=[]
 
@@ -83,7 +83,8 @@ export class EncuestasFormComponent implements OnInit {
   }
 
  getQuestions(){
-   console.log(this.serviceEncuesta.getArray())
+  this.preguntas =this.serviceEncuesta.getArray()
+  console.log(this.preguntas)
  }
 
   getRespuesta(){

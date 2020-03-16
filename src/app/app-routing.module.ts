@@ -6,7 +6,7 @@ import { CreaEncuestaComponent } from './components/crea-encuesta/crea-encuesta.
 
 const routes: Routes = [
   {
-    path: " ",
+    path: "",
     component:CreaEncuestaComponent
   },
   {
